@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use app\Models\Tarea;
+use App\Models\Tarea;
 
 class TareasController extends Controller
 {
@@ -23,7 +23,27 @@ class TareasController extends Controller
     $tarea->titulo = $request->titulo;
     $tarea->save();
 
-    return redirect()->route('tareas')-> with('success','Tarea creada');
+    return redirect()->route('index')-> with('success','Tarea creada');
+}
+
+public function index (){
+    $tareas = Tarea::all();
+    return view('paginas.index',['tareas' => $tareas]);
+}
+
+public function show ($id){
+    $tarea = Tarea::find($id);
+    return view('paginas.show',['tarea' => $tarea]);
+}
+
+public function update (){
+    $tareas = Tarea::all();
+    return view('paginas.index',['tareas' => $tareas]);
+}
+
+public function destroy (){
+    $tareas = Tarea::all();
+    return view('paginas.index',['tareas' => $tareas]);
 }
 
 }
